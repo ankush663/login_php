@@ -4,6 +4,7 @@ include('db.php');
 
 
 
+
 <?php
 $errors = array();
 
@@ -16,22 +17,20 @@ if (isset($_POST['submit'])) {
     $gender = $_POST['gender'];
     $mobile = $_POST['mobile'];
     $address = $_POST['address'];
-
-    // checking if email already exists or not 
+    // mail
     $check_mail = "SELECT * FROM `register` WHERE email = '$email' ";
     $result_mail = mysqli_query($connect, $check_mail);
-    
-    // checking if mobile number cannot be same 
+    //mobile
     $check_mobile = "SELECT * FROM `register` WHERE mobile = '$mobile'";
     $result_mobile = mysqli_query($connect, $check_mobile);
 
-    if (mysqli_num_rows($result_mail) > 0) {
-        $errors['email'] = "Email already exists";
-    } elseif (empty($email)) {
-        $errors['email'] = "Email cannot be empty";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors['email'] = "Invalid email format";
-    }
+if (mysqli_num_rows($result_mail) > 0) {
+    $errors['email'] = "Email already exists";
+} elseif (empty($email)) {
+    $errors['email'] = "Email cannot be empty";
+} elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors['email'] = "Invalid email format";
+}
 
     if (mysqli_num_rows($result_mobile) > 0) {
         $errors['mobile'] = "Mobile number already exists";
@@ -43,7 +42,7 @@ if (isset($_POST['submit'])) {
 
     if (empty($firstname)) {
         $errors['firstname'] = "Firstname is required";
-    } elseif (preg_match('/[0-9]/', $firstname)) {
+} elseif (preg_match('/[0-9]/', $firstname)) {
         $errors['firstname'] = "Firstname should not contain numbers";
     }
 
@@ -65,7 +64,8 @@ if (isset($_POST['submit'])) {
         $errors['password'] = "Password cannot be empty";
     } elseif (empty($confirm_pass)) {
         $errors['confirm_password'] = "It cannot be blank";
-    } elseif ($password != $confirm_pass) {
+    }
+elseif ($password != $confirm_pass) {
         $errors['password'] = "Password is not match....enter again";
     }
 
