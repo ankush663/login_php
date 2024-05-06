@@ -17,7 +17,7 @@ $firstname = $_SESSION['firstname'];
 <body>
     <h2>Welcome <?php echo $firstname ?> </h2>
 
-    <a href="logout.php">Logout</a>
+    <a href="logout.php">Log</a>
 
 </body>
 </html>
